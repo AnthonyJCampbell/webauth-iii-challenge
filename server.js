@@ -3,7 +3,7 @@ const helmet = require('helmet');
 const cors = require('cors')
 
 // ROUTES
-// const XXXauth = require()
+const Router = require('./routes/routes');
 
 const server = express();
 
@@ -12,10 +12,9 @@ server.use(express.json())
 server.use(cors())
 
 // Use ROUTES
-// server.use('/api', XXXauth);
+server.use('/api', Router)
 
 server.get('/', (req, res) => {
-  console.log('he')
   res.send("It's alive!");
 });
 
