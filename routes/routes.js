@@ -2,6 +2,7 @@ const router = require('express').Router()
 const bcrypt = require('bcryptjs');
 const jwt = require('jsonwebtoken');
 const Users = require('./models.js')
+const restricted = require('./restricted-middleware')
 
 // No need to pre-pend '/api'
 router.post('/register', (req, res) => {
@@ -55,6 +56,13 @@ router.post('/login', (req, res) => {
 })
 
 // router.get('/api/users')
+router.get('/users', restricted, (req, res) => {
+  Users.find()
+    .then(users => {
+      res.json(users)
+    })
+    .catch(err => res.send(err))
+})
 
 
 module.exports = router;
