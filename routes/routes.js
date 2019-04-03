@@ -57,11 +57,16 @@ router.post('/login', (req, res) => {
 
 // router.get('/api/users')
 router.get('/users', restricted, (req, res) => {
-  Users.find()
-    .then(users => {
-      res.json(users)
-    })
-    .catch(err => res.send(err))
+  const department = req.decodedToken.department;
+  if (department.includes('HR')) {
+    Users.find()
+      .then(users => {
+        res.json(users)
+      })
+      .catch(err => res.send(err))
+  } else {
+    res.json('Sorry you need to be god!')
+  }
 })
 
 
