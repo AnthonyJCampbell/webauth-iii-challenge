@@ -14,8 +14,8 @@ export default function Users(props) {
   useEffect(() => {
     axios.get('http://localhost:3030/api/users', {
       headers: {
-        Authorization: localStorage.getItem('token')
-      }
+        Authorization: localStorage.getItem("token"),
+      },
     })
       .then(res => {
         setUsers(res.data)
@@ -24,10 +24,11 @@ export default function Users(props) {
         console.log(error)
       })
   }, [])
-
+ 
+  console.log(users)
   return (
     <div className='users'>
-      {[].map(u => (
+      {users.map(u => (
         <li key={u.id}>
           {u.username}
         </li>
