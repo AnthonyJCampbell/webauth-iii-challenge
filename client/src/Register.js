@@ -8,7 +8,18 @@ export default function Register() {
   const [ flash, setFlash ] = useState('')
 
   const submit = () => {
-    console.log(passwordRef.current.value)
+    axios.post('http://localhost:3030/api/register', {
+      username: usernameRef.current.value,
+      password: passwordRef.current.value,
+      department: departmentRef.current.value
+    })
+      .then(res => {
+        localStorage.setItem('token', res.data.password)
+        setFlash(`Here's your token: ${res.data.password}`)
+      })
+      .catch(error => {
+        setFlash(`Something bad has happened! ${error.desponse.data.message}`)
+      })
   }
 
   return(
