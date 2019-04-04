@@ -7,7 +7,17 @@ export default function Login() {
   const [ flash, setFlash ] = useState('')
 
   const submit = () => {
-    console.log(passwordRef.current.value)
+    axios.post('http://localhost:3030/api/login', {
+      username: usernameRef.current.value,
+      password: passwordRef.current.value,
+    })
+      .then(res => {
+        localStorage.setItem('token', res.data.token)
+        setFlash(`Here's your token: ${res.data.token}`)
+      })
+      .catch(error => {
+        setFlash(`Something bad has happened! ${error.desponse.data.message}`)
+      })
   }
 
   return(
