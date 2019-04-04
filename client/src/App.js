@@ -19,7 +19,7 @@ export function App (props) {
       <main>
         <Route path='/' exact component={Login}/>
         <Route path='/register' component={Register}/>
-        {/* <Route path='/users' exact component={Users} /> */}
+        <Route path='/users' exact component={Users} />
       </main>
     </div>
   );
